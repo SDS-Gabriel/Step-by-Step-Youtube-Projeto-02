@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0f172a; /* Fundo escuro para destacar o cartão */
+}
+
+/* 1. Criando o ambiente 3D */
+.card-container {
+    perspective: 1000px; /* Dá a sensação de profundidade no espaço 3D */
+}
+
+.credit-card {
+    position: relative;
+    width: 380px;
+    height: 240px;
+    transform-style: preserve-3d; /* Permite que os filhos herdem o ambiente 3D */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+/* 2. O gatilho que faz o cartão girar no Hover */
+.card-container:hover .credit-card {
+    transform: rotateY(180deg);
+}
+
+/* 3. Propriedades compartilhadas pelas duas faces */
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Esconde a face oposta durante o giro */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* 4. Estilização da Frente */
+.front {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.front header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.front header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.front header .logo h5 {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.front header .chip {
+    width: 45px;
+}
+
+.front .number {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    margin-top: 5px;
+}
+
+.front .bottom-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.front h6 {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 1px;
+}
+
+.front .name {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.front .date {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* 5. Estilização do Verso (Nasce virado em 180deg) */
+.back {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: rotateY(180deg);
+    padding: 20px 0; /* Remove padding lateral para a tarja encostar nas bordas */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.back .magnetic-strip {
+    width: 100%;
+    height: 45px;
+    background-color: #000;
+}
+
+.back .signature-cvv {
+    padding: 0 25px;
+}
+
+.back .signature-cvv h6 {
+    font-size: 9px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.back .signature-bar {
+    width: 100%;
+    height: 35px;
+    background: repeating-linear-gradient(
+        45deg,
+        #f1f5f9,
+        #f1f5f9 10px,
+        #e2e8f0 10px,
+        #e2e8f0 20px
+    );
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+
+.back .cvv-number {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-style: italic;
+    color: #000;
+    background: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.back .back-content {
+    padding: 0 25px;
+}
+
+.back .back-content p {
+    font-size: 8px;
+    color: #64748b;
+    line-height: 1.4;
+    text-align: justify;
+}
